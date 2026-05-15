@@ -95,7 +95,7 @@
         function handleRegistration(event) {
             event.preventDefault();
             
-            // Build the fresh operational schema object configuration
+
             const freshSchemaInstance = {
                 transactions: [],
                 customers: [
@@ -109,7 +109,7 @@
                 }
             };
 
-            // Save structural brain parameters to localStorage
+
             localStorage.setItem('quench_pos_shared_brain', JSON.stringify(freshSchemaInstance));
             
             alert(`Success! Database initialized for "${document.getElementById('reg-station-name').value}". Rerouting to Portal...`);
