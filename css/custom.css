@@ -1,0 +1,26 @@
+/* Quench Water POS Global Core Typography & Base System Variables */
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Sidebar Navigation Highlight Utility Class */
+.sidebar-active {
+    background-color: #0284c7; /* Sky 600 */
+    color: #ffffff;
+}
+
+/* Hidden Print Scoping Modifiers */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #print-area-thermal-target, #print-area-thermal-target * {
+        visibility: visible;
+    }
+    #print-area-thermal-target {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+}

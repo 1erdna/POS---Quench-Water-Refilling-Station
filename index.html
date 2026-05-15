@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quench Water POS - Gateway</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 h-screen flex flex-col justify-between relative overflow-hidden">
+
+    <div class="absolute -top-40 -right-40 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
+
+    <header class="p-6 relative z-10 max-w-7xl mx-auto w-full flex justify-between items-center">
+        <div class="flex items-center gap-2.5">
+            <div class="bg-blue-600 p-2 rounded-xl text-white shadow-md shadow-blue-500/20">
+                <i class="fa-solid fa-droplet text-lg"></i>
+            </div>
+            <span class="font-extrabold text-base tracking-wider uppercase text-white">Quench <span class="text-blue-500">POS</span></span>
+        </div>
+        <span class="text-xs font-bold text-slate-400 bg-slate-800/60 px-3 py-1.5 border border-slate-700/50 rounded-lg">v2.1 Stable</span>
+    </header>
+
+    <main class="relative z-10 max-w-3xl mx-auto text-center px-4 space-y-6 my-auto">
+        <div class="inline-block bg-blue-500/10 text-blue-400 text-xs font-bold px-4 py-1.5 rounded-full border border-blue-500/20 uppercase tracking-widest mb-2">
+            Station Management System
+        </div>
+        <h1 class="text-4xl md:text-6xl font-black text-white tracking-tight leading-none">
+            Pure Analytics. <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Fluid Workflows.</span>
+        </h1>
+        <p class="text-slate-400 text-sm md:text-base max-w-lg mx-auto leading-relaxed font-medium">
+            The decentralized terminal engine engineered explicitly for tracking sales logs, gallon borrowing debts, and live inventory for local water refilling stations.
+        </p>
+        <div class="pt-4 flex flex-col sm:flex-row justify-center items-center gap-3">
+            <a href="LogIn.html" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 font-bold text-white py-3.5 px-8 rounded-xl shadow-lg shadow-blue-600/20 tracking-wide text-sm transition-all active:scale-[0.99]">
+                Launch Access Portal <i class="fa-solid fa-arrow-right ml-1.5 text-xs"></i>
+            </a>
+            <a href="Register.html" class="w-full sm:w-auto bg-slate-800 hover:bg-slate-700 font-bold text-slate-300 py-3.5 px-8 rounded-xl border border-slate-700/60 tracking-wide text-sm transition-all">
+                Create Station Profile
+            </a>
+        </div>
+    </main>
+
+    <footer class="p-6 relative z-10 max-w-7xl mx-auto w-full border-t border-slate-800/60 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p class="text-xs text-slate-500 font-medium">
+            &copy; 2026 Quench Refilling Networks Inc. All local rights reserved.
+        </p>
+        <div class="flex items-center gap-4 text-xs font-bold text-slate-400">
+            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-ping"></span> Shared Brain Active</span>
+        </div>
+    </footer>
+</body>
+</html>

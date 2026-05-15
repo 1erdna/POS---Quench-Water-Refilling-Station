@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quench POS - Access Portal</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 h-screen flex items-center justify-center relative overflow-hidden">
+
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl"></div>
+
+    <div class="max-w-md w-full mx-4 relative z-10">
+        <div class="text-center mb-8">
+            <div class="inline-block bg-blue-600 p-4 rounded-2xl text-white shadow-lg shadow-blue-500/20 mb-3">
+                <i class="fa-solid fa-droplet text-3xl"></i>
+            </div>
+            <h1 class="text-2xl font-black tracking-tight text-slate-900">Welcome Back</h1>
+            <p class="text-slate-500 text-sm mt-1">Select your access tier to open Quench POS</p>
+        </div>
+
+        <div class="bg-white border border-slate-100 rounded-3xl p-6 shadow-xl shadow-slate-100/50">
+            <form onsubmit="handleLogin(event)" class="space-y-5">
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Access Tier / Role</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="relative flex flex-col p-4 border-2 border-slate-200 rounded-2xl cursor-pointer hover:border-blue-200 hover:bg-blue-50/20 transition-all select-none has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50/40">
+                            <input type="radio" name="user-role" value="admin" checked class="sr-only">
+                            <i class="fa-solid fa-user-shield text-xl text-slate-400 group-checked:text-blue-600 mb-2"></i>
+                            <span class="font-bold text-sm text-slate-900">System Admin</span>
+                            <span class="text-[11px] text-slate-400 font-medium mt-0.5">Full Master Controls</span>
+                        </label>
+                        <label class="relative flex flex-col p-4 border-2 border-slate-200 rounded-2xl cursor-pointer hover:border-blue-200 hover:bg-blue-50/20 transition-all select-none has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50/40">
+                            <input type="radio" name="user-role" value="staff" class="sr-only">
+                            <i class="fa-solid fa-user-gear text-xl text-slate-400 mb-2"></i>
+                            <span class="font-bold text-sm text-slate-900">Station Staff</span>
+                            <span class="text-[11px] text-slate-400 font-medium mt-0.5">Sales & Inventory Only</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Passcode / Password</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400">
+                            <i class="fa-solid fa-lock text-sm"></i>
+                        </span>
+                        <input type="password" placeholder="••••••••" value="1234" required class="w-full border border-slate-200 rounded-xl pl-11 pr-4 py-3 text-sm bg-slate-50 focus:outline-none focus:border-blue-500 focus:bg-white transition-all font-mono">
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 font-bold text-white py-3.5 px-4 rounded-xl shadow-md shadow-blue-500/10 tracking-wide text-sm mt-2 transition-all active:scale-[0.99]">
+                    Authenticate Access <i class="fa-solid fa-arrow-right ml-1 text-xs"></i>
+                </button>
+            </form>
+        </div>
+
+        <div class="text-center mt-6">
+            <p class="text-xs text-slate-400 font-medium">
+                Need to register a new station? <a href="Register.html" class="text-blue-600 hover:underline font-bold">Create Account</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            const selectedRole = document.querySelector('input[name="user-role"]:checked').value;
+            
+            if (selectedRole === 'admin') {
+                window.location.href = 'AdminDashBoard.html';
+            } else {
+                window.location.href = 'StaffDashBoard.html';
+            }
+        }
+    </script>
+</body>
+</html>
