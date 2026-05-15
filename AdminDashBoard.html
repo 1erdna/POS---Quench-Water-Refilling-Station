@@ -448,7 +448,7 @@
     </div>
 
     <script>
-        // MASTER STRUCTURAL PRODUCTS CATALOGUE DEFINITIONS
+
         const PRODUCT_CATALOGUE = [
             { id: 'slim_refill', name: 'Slim 5-Gallon', desc: 'Refill Service Only', price: 2.00, type: 'refill', shape: 'slim' },
             { id: 'slim_new', name: 'Slim 5-Gallon', desc: 'New Container + Full Water', price: 12.00, type: 'new', shape: 'slim' },
@@ -457,31 +457,31 @@
             { id: 'pet_1l', name: '1L Pet Bottle Pack', desc: 'Pre-sealed Single Bottle', price: 1.00, type: 'pet', shape: 'none' }
         ];
 
-        // DATABASES CLIENT SHARED BACKBONE SCHEMA MODEL INSTANTIATION STATE
+
         let dbState = {
             transactions: [],
             customers: [],
             inventory: { caps: 500, seals: 500, slimGallons: 120, roundGallons: 95 }
         };
 
-        // RUNTIME TRANSACTION BASKET BASKETS INSTANCE
+
         let cart = {};
 
-        // MAIN GATEWAY RUNTIME BOOTSTRAPPING ENGINE LIFECYCLE HOOK
+
         window.addEventListener('DOMContentLoaded', () => {
             synchronizeSharedStateEngine();
             compileCatalogsDOM();
             refreshStateUIs();
-            switchTab('dashboard'); // Default active frame panel channel focus view
+            switchTab('dashboard'); 
         });
 
-        // RE-LOAD OR CONFIGURE MASTER SYSTEM STORAGE MATRIX CONTROL SCHEMAS
+
         function synchronizeSharedStateEngine() {
             const rawStorageData = localStorage.getItem('quench_pos_shared_brain');
             if (rawStorageData) {
                 try {
                     dbState = JSON.parse(rawStorageData);
-                    // Standard verification checks properties fallback structural assertions layers
+
                     if (!dbState.inventory) dbState.inventory = { caps: 500, seals: 500, slimGallons: 120, roundGallons: 95 };
                     if (!dbState.customers) dbState.customers = [];
                     if (!dbState.transactions) dbState.transactions = [];
@@ -489,7 +489,7 @@
                     commitStateToStorageEngine();
                 }
             } else {
-                // Prime initial dummy values fallback matrix logs profiles
+
                 dbState.customers = [
                     { name: "Juan Dela Cruz", phone: "09171234567", address: "123 Mabini St, Manila", slimBorrowed: 4, roundBorrowed: 1, unpaidBalance: 15.00 },
                     { name: "Maria Clara", phone: "09187654321", address: "456 Rizal Ave, Makati", slimBorrowed: 0, roundBorrowed: 3, unpaidBalance: 0.00 },
@@ -503,7 +503,7 @@
             localStorage.setItem('quench_pos_shared_brain', JSON.stringify(dbState));
         }
 
-        // TAB NAVIGATION CONTROLS GRAPHICAL RE-ARRANGEMENTS INTERACTIVE HANDLERS
+
         function switchTab(targetViewId) {
             const modulesList = ['dashboard', 'new-sale', 'customers', 'inventory', 'sales-history'];
             modulesList.forEach(m => {
@@ -520,7 +520,7 @@
                 }
             });
             
-            // Auto sync changes safely when tabs cycle paths active states reload profiles
+
             synchronizeSharedStateEngine();
             renderMetricsCanvasLayoutCounters();
         }
@@ -531,7 +531,7 @@
             else modalNode.classList.add('hidden');
         }
 
-        // COMPILE SYSTEM PRODUCT DOM CARD ELEMENTS BUILD LOOPS PACKS
+
         function compileCatalogsDOM() {
             const gridContainer = document.getElementById('products-container');
             gridContainer.innerHTML = '';
@@ -561,7 +561,7 @@
             });
         }
 
-        // POPULATE REGISTERED DROPDOWN BOX INTERFACES COMPONENT FIELDS
+
         function syncCustomerSelectionDropdownUIOptions() {
             const selectContainer = document.getElementById('sale-customer-select');
             selectContainer.innerHTML = '<option value="Walk-in / Guest">Walk-in / Guest</option>';
@@ -573,7 +573,7 @@
             });
         }
 
-        // INTERACTIVE SHOPPING CHECKOUT BASKETS ACTIONS ENGINES LOGICS
+
         function addItemToBasketScope(catalogItemId) {
             if (cart[catalogItemId]) cart[catalogItemId]++;
             else cart[catalogItemId] = 1;
@@ -643,7 +643,7 @@
             }
         }
 
-        // COMMIT checkout PROCESSING PIPELINES EXECUTION MATRIX ENGINE
+
         function submitTransaction() {
             const basketProductReferenceKeysList = Object.keys(cart);
             if (basketProductReferenceKeysList.length === 0) {
@@ -660,7 +660,7 @@
             let transactionIncurredAssetBorrowCount = 0;
             let compiledItemsReceiptLineArrays = [];
 
-            // INVENTORY BALANCE VALIDATIONS COMPLIANCE LOGIC MATRIX HOOKS LOOP
+
             for (let currentBasketKey of basketProductReferenceKeysList) {
                 const catalogReferenceItem = PRODUCT_CATALOGUE.find(p => p.id === currentBasketKey);
                 const itemRequestedCountVolume = cart[currentBasketKey];
@@ -670,7 +670,7 @@
                     transactionRefillsUnitsAccumulator += itemRequestedCountVolume;
                 }
 
-                // DEDUCTIONS FORECAST MATCHING RESOURCE CONTROLS SPECIFICATION RULES
+
                 if (catalogReferenceItem.type === 'new') {
                     if (dbState.inventory.caps < itemRequestedCountVolume || dbState.inventory.seals < itemRequestedCountVolume) {
                         alert(`Deduction block triggered. Critical shortage on production consumables caps/seals raw items!`);
@@ -698,7 +698,7 @@
             const computedDeliverySurchargeFeeAmount = distributionModalityDeliveryOptionFlag ? 2.00 : 0.00;
             const transactionAbsoluteGrandInvoiceTotal = operationalSubtotalSumValue + computedDeliverySurchargeFeeAmount;
 
-            // DEDUCT PHYSICAL INVENTORY BALANCES FOR COMBO ASSETS ACCOUNTS TRUCKS
+
             basketProductReferenceKeysList.forEach(activeKey => {
                 const itemTargetReference = PRODUCT_CATALOGUE.find(p => p.id === activeKey);
                 const volumeConsumedUnitsCount = cart[activeKey];
@@ -710,7 +710,7 @@
                 }
             });
 
-            // LOG BORROW BALANCE METRICS DIRECTLY INTO REGISTERED CUSTOMER PORTFOLIO
+
             if (designatedClientProfileName !== "Walk-in / Guest" && containerTrackingStrategySelectionCode === 'borrowed') {
                 const matchedProfileTargetObject = dbState.customers.find(c => c.name === designatedClientProfileName);
                 if (matchedProfileTargetObject) {
@@ -729,7 +729,7 @@
                 }
             }
 
-            // INSTANTIATE AND MERGE TRANSACTION OBJECT RECORD MATRIX INSIDE HISTORY DATABASE ARR
+
             const structuralInvoiceTransactionRecord = {
                 id: 'QX-' + Date.now().toString().slice(-6),
                 timestamp: new Date().toISOString(),
@@ -746,7 +746,7 @@
             dbState.transactions.unshift(structuralInvoiceTransactionRecord);
             commitStateToStorageEngine();
 
-            // RE-FLUSH AND RE-INITIALIZE WORKSPACE VALUES CONTEXT CONTROLS SHEETS
+
             cart = {};
             document.getElementById('sale-delivery-toggle').checked = false;
             document.querySelector('input[name="container-handling"][value="own"]').checked = true;
@@ -756,7 +756,7 @@
             viewReceipt(structuralInvoiceTransactionRecord.id);
         }
 
-        // MASTER UI RENDER MANAGER ENGINE RE-EVALUATION INTERFACES FOR DISPLAY NODES
+
         function refreshStateUIs() {
             synchronizeSharedStateEngine();
             renderMetricsCanvasLayoutCounters();
@@ -786,14 +786,14 @@
                 }
             });
 
-            // OUTPUT CALCULATED VALUES TO DOM VIEW CARDS
+
             document.getElementById('metric-sales').textContent = `₱${financialSalesRunningTotalSum.toFixed(2)}`;
             document.getElementById('metric-count').textContent = `${counterTransactionsVolumeValue} transaction${counterTransactionsVolumeValue === 1 ? '' : 's'}`;
             document.getElementById('metric-refills').textContent = operationalRefillsOutputVolumeCount.toString();
             document.getElementById('metric-borrowed').textContent = overallActiveBorrowedGallonsUnitsCount.toString();
             document.getElementById('metric-deliveries').textContent = pendingRiderDeliveriesDispatchesCount.toString();
 
-            // BUILD RECENT MINI TABLE INNER ELEMENTS
+
             const dashboardRecentTableBodyNode = document.getElementById('dashboard-recent-txs');
             dashboardRecentTableBodyNode.innerHTML = '';
             const targetedTopSubsetListArray = dbState.transactions.slice(0, 5);
@@ -821,7 +821,7 @@
                 });
             }
 
-            // BUILD CORE CUSTOMERS VIEW ENTRIES LIST DATATABLE LAYOUT
+
             const customersTableContainerBody = document.getElementById('customers-table-body');
             customersTableContainerBody.innerHTML = '';
             
@@ -847,7 +847,7 @@
                 });
             }
 
-            // BUILD REALTIME WAREHOUSE LOGISTICS INVENTORY STOCK PANEL DATA ROWS
+
             const stockTableContainerBodyNode = document.getElementById('inventory-table-body');
             stockTableContainerBodyNode.innerHTML = '';
             
@@ -879,7 +879,7 @@
                 stockTableContainerBodyNode.appendChild(itemRowNodeElement);
             });
 
-            // AUDIT HISTORY COMPREHENSIVE RECORDS LIST ROWS MATRIX INJECTIONS RENDERER LOOPS
+
             const historyAuditingTableBodyNode = document.getElementById('sales-history-body');
             historyAuditingTableBodyNode.innerHTML = '';
 
@@ -910,7 +910,7 @@
             }
         }
 
-        // CONTROL REGISTRATION FLOWS PERSISTENCE DATA MODELS HANDLERS
+
         function saveCustomer(event) {
             event.preventDefault();
             const checkedProfileNameInputString = document.getElementById('cust-name').value.trim();
@@ -937,7 +937,7 @@
             refreshStateUIs();
         }
 
-        // TRIGGER CONTROL INVENTORY QUANTUMS MANUAL WINDOW DIALOG ACTIONS
+
         function openStockModal(configurationAdjustmentDirectionModeCode) {
             document.getElementById('stock-action-type').value = configurationAdjustmentDirectionModeCode;
             document.getElementById('stock-modal-title').textContent = configurationAdjustmentDirectionModeCode === 'add' ? 'Inject Warehouse Restock Stock' : 'Deduct Inventory Levels Manual Adjust';
@@ -976,7 +976,6 @@
             refreshStateUIs();
         }
 
-        // TRIGGER AND HANDLE CUSTOMER ACCOUNT MODALS DEBTS OR ASSETS REDUCTIONS CONTROLLER
         function triggerCustAction(customerArrayPositionIndex, targetedOperationalContextActionCode) {
             const customerProfileObjectInstance = dbState.customers[customerArrayPositionIndex];
             document.getElementById('cust-action-index').value = customerArrayPositionIndex;
@@ -1035,14 +1034,14 @@
                         return;
                     }
                     targetedCustomerProfileRecordInstance.slimBorrowed -= operationalUnitsReturnedVolumeInput;
-                    dbState.inventory.slimGallons += operationalUnitsReturnedVolumeInput; // Re-inject back empty stock units
+                    dbState.inventory.slimGallons += operationalUnitsReturnedVolumeInput; 
                 } else {
                     if (targetedCustomerProfileRecordInstance.roundBorrowed < operationalUnitsReturnedVolumeInput) {
                         alert("Validation error. Value exceeds current outstanding volume registered on this profile.");
                         return;
                     }
                     targetedCustomerProfileRecordInstance.roundBorrowed -= operationalUnitsReturnedVolumeInput;
-                    dbState.inventory.roundGallons += operationalUnitsReturnedVolumeInput; // Re-inject back empty stock units
+                    dbState.inventory.roundGallons += operationalUnitsReturnedVolumeInput; 
                 }
             } else {
                 const financialCashRemittanceAmountInput = parseFloat(document.getElementById('cust-action-input').value);
@@ -1058,7 +1057,7 @@
             refreshStateUIs();
         }
 
-        // PURGE SYSTEM HISTORY LEDGER SAFELY FROM CONSOLE STORAGE DEV ACTIONS
+
         function purgeSalesLogsHistory() {
             if (confirm("Are you absolutely sure you want to delete all historical logs records? This operation is permanent.")) {
                 dbState.transactions = [];
@@ -1067,7 +1066,7 @@
             }
         }
 
-        // COMPILE THERMAL SLIP DOM STRUCTURES LAYOUT VALUES DISPLAY NODES OUTPUTS
+
         function viewReceipt(transactionTargetIdString) {
             const targetedInvoiceTxObjectRecord = dbState.transactions.find(t => t.id === transactionTargetIdString);
             if (!targetedInvoiceTxObjectRecord) return;
