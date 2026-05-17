@@ -80,7 +80,7 @@
                                     <input type="checkbox" id="sale-delivery-toggle" class="sr-only peer" onchange="updateCartUI()">
                                     <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-sky-600"></div>
                                 </label>
-                                <span class="text-sm font-bold text-slate-500">Rider Delivery <span class="text-sky-600 font-extrabold">(+₱2.00)</span></span>
+                                <span class="text-sm font-bold text-slate-500">Rider Delivery <span class="text-sky-600 font-extrabold">(+₱20.00)</span></span>
                             </div>
                         </div>
                     </div>
@@ -236,11 +236,11 @@
 
     <script>
         const PRODUCT_CATALOGUE = [
-            { id: 'slim_refill', name: 'Slim 5-Gallon', desc: 'Refill Service Only', price: 2.00, type: 'refill', shape: 'slim' },
-            { id: 'slim_new', name: 'Slim 5-Gallon', desc: 'New Container + Full Water', price: 12.00, type: 'new', shape: 'slim' },
-            { id: 'round_refill', name: 'Round 5-Gallon', desc: 'Refill Service Only', price: 2.00, type: 'refill', shape: 'round' },
-            { id: 'round_new', name: 'Round 5-Gallon', desc: 'New Container + Full Water', price: 12.00, type: 'new', shape: 'round' },
-            { id: 'pet_1l', name: '1L Pet Bottle Pack', desc: 'Pre-sealed Single Bottle', price: 1.00, type: 'pet', shape: 'none' }
+            { id: 'slim_refill', name: 'Slim Gallon', desc: 'Refill Service Only', price: 25.00, type: 'refill', shape: 'slim' },
+            { id: 'slim_new', name: 'Slim Gallon', desc: 'New Container + Full Water', price: 170.00, type: 'new', shape: 'slim' },
+            { id: 'round_refill', name: 'Round Gallon', desc: 'Refill Service Only', price: 28.00, type: 'refill', shape: 'round' },
+            { id: 'round_new', name: 'Round Gallon', desc: 'New Container + Full Water', price: 175.00, type: 'new', shape: 'round' },
+            { id: 'pet_1l', name: '1L Bottle', desc: 'Pre-sealed Single Bottle', price: 10.00, type: 'pet', shape: 'none' }
         ];
 
         let dbState = { transactions: [], customers: [], inventory: { caps: 0, seals: 0, slimGallons: 0, roundGallons: 0 } };
@@ -250,7 +250,7 @@
             synchronizeSharedStateEngine();
             compileCatalogsDOM();
             refreshStateUIs();
-            switchTab('new-sale'); // Staff terminal defaults straight into active order point
+            switchTab('new-sale'); 
         });
 
         function synchronizeSharedStateEngine() {
@@ -374,7 +374,7 @@
             }
 
             const deliveryFlag = document.getElementById('sale-delivery-toggle').checked;
-            const fee = deliveryFlag ? 2.00 : 0.00;
+            const fee = deliveryFlag ? 20.00 : 0.00;
             const total = subtotal + fee;
 
             document.getElementById('cart-subtotal').textContent = `₱${subtotal.toFixed(2)}`;
@@ -414,7 +414,7 @@
                 receiptLines.push({ id: prod.id, name: prod.name, desc: prod.desc, price: prod.price, qty: qty });
             }
 
-            const fee = isDelivery ? 2.00 : 0.00;
+            const fee = isDelivery ? 20.00 : 0.00;
             const grantTotal = subtotal + fee;
 
             // Apply stock reductions
@@ -428,7 +428,7 @@
                 }
             });
 
-            // Log customer bottle obligations 
+
             if (customerName !== "Walk-in / Guest" && containerStrategy === 'borrowed') {
                 const customerObj = dbState.customers.find(c => c.name === customerName);
                 if (customerObj) {
@@ -467,7 +467,7 @@
             synchronizeSharedStateEngine();
             syncCustomerSelectionDropdownUIOptions();
 
-            // Render Read-Only Stocks layout
+  
             const stockBody = document.getElementById('inventory-table-body');
             stockBody.innerHTML = '';
             const mapList = [
@@ -488,7 +488,7 @@
                 stockBody.appendChild(tr);
             });
 
-            // Render History logs list
+
             const historyBody = document.getElementById('sales-history-body');
             historyBody.innerHTML = '';
             if (dbState.transactions.length === 0) {
