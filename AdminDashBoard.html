@@ -149,7 +149,7 @@
                                     <input type="checkbox" id="sale-delivery-toggle" class="sr-only peer" onchange="updateCartUI()">
                                     <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
                                 </label>
-                                <span class="text-sm font-bold text-slate-500">Rider Delivery <span class="text-blue-600 font-extrabold">(+₱2.00)</span></span>
+                                <span class="text-sm font-bold text-slate-500">Rider Delivery <span class="text-blue-600 font-extrabold">(+₱20.00)</span></span>
                             </div>
                         </div>
                     </div>
@@ -349,8 +349,8 @@
                     <select id="stock-item-key" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm bg-slate-50 focus:outline-none focus:border-blue-500 focus:bg-white transition-all font-bold">
                         <option value="caps">Caps (Bottle Tops Closure)</option>
                         <option value="seals">Heat Seals (Tamper Proof Sleeves)</option>
-                        <option value="slimGallons">Empty Slim 5-Gallon Shells</option>
-                        <option value="roundGallons">Empty Round 5-Gallon Shells</option>
+                        <option value="slimGallons">Empty Slim Gallon Shells</option>
+                        <option value="roundGallons">Empty Round Gallon Shells</option>
                     </select>
                 </div>
                 <div>
@@ -450,11 +450,11 @@
     <script>
 
         const PRODUCT_CATALOGUE = [
-            { id: 'slim_refill', name: 'Slim 5-Gallon', desc: 'Refill Service Only', price: 2.00, type: 'refill', shape: 'slim' },
-            { id: 'slim_new', name: 'Slim 5-Gallon', desc: 'New Container + Full Water', price: 12.00, type: 'new', shape: 'slim' },
-            { id: 'round_refill', name: 'Round 5-Gallon', desc: 'Refill Service Only', price: 2.00, type: 'refill', shape: 'round' },
-            { id: 'round_new', name: 'Round 5-Gallon', desc: 'New Container + Full Water', price: 12.00, type: 'new', shape: 'round' },
-            { id: 'pet_1l', name: '1L Pet Bottle Pack', desc: 'Pre-sealed Single Bottle', price: 1.00, type: 'pet', shape: 'none' }
+            { id: 'slim_refill', name: 'Slim Gallon', desc: 'Refill Service Only', price: 25.00, type: 'refill', shape: 'slim' },
+            { id: 'slim_new', name: 'Slim Gallon', desc: 'New Container + Full Water', price: 170.00, type: 'new', shape: 'slim' },
+            { id: 'round_refill', name: 'Round Gallon', desc: 'Refill Service Only', price: 28.00, type: 'refill', shape: 'round' },
+            { id: 'round_new', name: 'Round Gallon', desc: 'New Container + Full Water', price: 175.00, type: 'new', shape: 'round' },
+            { id: 'pet_1l', name: '1L Bottle', desc: 'Pre-sealed Single Bottle', price: 10.00, type: 'pet', shape: 'none' }
         ];
 
 
@@ -491,9 +491,9 @@
             } else {
 
                 dbState.customers = [
-                    { name: "Juan Dela Cruz", phone: "09171234567", address: "123 Mabini St, Manila", slimBorrowed: 4, roundBorrowed: 1, unpaidBalance: 15.00 },
-                    { name: "Maria Clara", phone: "09187654321", address: "456 Rizal Ave, Makati", slimBorrowed: 0, roundBorrowed: 3, unpaidBalance: 0.00 },
-                    { name: "Emilio Aguinaldo", phone: "09229998888", address: "Kawit, Cavite", slimBorrowed: 2, roundBorrowed: 2, unpaidBalance: 45.50 }
+                    { name: "Miles Basalo", phone: "09171234567", address: "Lapasan", slimBorrowed: 4, roundBorrowed: 1, unpaidBalance: 15.00 },
+                    { name: "Dario Velez", phone: "09187654321", address: "Kauswagan", slimBorrowed: 0, roundBorrowed: 3, unpaidBalance: 0.00 },
+                    { name: "Emilio Chou", phone: "09229998888", address: "Macasandig", slimBorrowed: 2, roundBorrowed: 2, unpaidBalance: 45.50 }
                 ];
                 commitStateToStorageEngine();
             }
@@ -555,7 +555,7 @@
                         <h4 class="font-bold text-slate-900 leading-tight text-sm">${item.name}</h4>
                         <p class="text-[11px] font-semibold text-slate-400 mt-0.5">${item.desc}</p>
                     </div>
-                    ${item.type === 'new' ? '<span class="absolute top-4 right-4 bg-indigo-100 text-indigo-700 text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded-md tracking-wider">Combo Pack</span>' : ''}
+                    ${item.type === 'new' ? '<span class="..."></span>' : ''}
                 `;
                 gridContainer.appendChild(elementNode);
             });
@@ -629,7 +629,7 @@
             }
 
             const isDeliverySurchargeTriggered = document.getElementById('sale-delivery-toggle').checked;
-            const evaluatedDeliverySurchargeAmount = isDeliverySurchargeTriggered ? 2.00 : 0.00;
+            const evaluatedDeliverySurchargeAmount = isDeliverySurchargeTriggered ? 20.00 : 0.00;
             const absoluteInvoiceTotalAmount = runningSubtotalAccumulator + evaluatedDeliverySurchargeAmount;
 
             document.getElementById('cart-subtotal').textContent = `₱${runningSubtotalAccumulator.toFixed(2)}`;
@@ -677,11 +677,11 @@
                         return;
                     }
                     if (catalogReferenceItem.shape === 'slim' && dbState.inventory.slimGallons < itemRequestedCountVolume) {
-                        alert(`Transaction Aborted. Empty Slim 5-Gallon container stock depletion detected.`);
+                        alert(`Transaction Aborted. Empty Slim Gallon container stock depletion detected.`);
                         return;
                     }
                     if (catalogReferenceItem.shape === 'round' && dbState.inventory.roundGallons < itemRequestedCountVolume) {
-                        alert(`Transaction Aborted. Empty Round 5-Gallon container stock depletion detected.`);
+                        alert(`Transaction Aborted. Empty Round Gallon container stock depletion detected.`);
                         return;
                     }
                 }
@@ -695,7 +695,7 @@
                 });
             }
 
-            const computedDeliverySurchargeFeeAmount = distributionModalityDeliveryOptionFlag ? 2.00 : 0.00;
+            const computedDeliverySurchargeFeeAmount = distributionModalityDeliveryOptionFlag ? 20.00 : 0.00;
             const transactionAbsoluteGrandInvoiceTotal = operationalSubtotalSumValue + computedDeliverySurchargeFeeAmount;
 
 
@@ -854,8 +854,8 @@
             const operationalInventoryItemsSchemaMapList = [
                 { key: 'caps', name: 'Water Bottle Closures (Caps)', unit: 'units (pcs)' },
                 { key: 'seals', name: 'Tamper Proof Shrink Wrap (Seals)', unit: 'units (pcs)' },
-                { key: 'slimGallons', name: 'Empty Stock Slim 5-Gallon Shells', unit: 'cylinders' },
-                { key: 'roundGallons', name: 'Empty Stock Round 5-Gallon Shells', unit: 'cylinders' }
+                { key: 'slimGallons', name: 'Empty Stock Slim Gallon Shells', unit: 'cylinders' },
+                { key: 'roundGallons', name: 'Empty Stock Round Gallon Shells', unit: 'cylinders' }
             ];
 
             operationalInventoryItemsSchemaMapList.forEach(schemaRecord => {
@@ -920,7 +920,8 @@
             if (dbState.customers.some(c => c.name.toLowerCase() === checkedProfileNameInputString.toLowerCase())) {
                 alert("Operation Aborted. This name matches an existing profile inside database.");
                 return;
-            }
+            }       
+            
 
             dbState.customers.push({
                 name: checkedProfileNameInputString,
